@@ -13,6 +13,14 @@ function(catkin_workspace)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+  foreach(path ${CMAKE_INCLUDE_PATH})
+    include_directories(${path})
+  endforeach()
+  foreach(path ${CMAKE_PREFIX_PATH})
+    message(STATUS "Include directory added: ${path}/include")
+    include_directories(${path}/include)
+  endforeach()
+
   # libraries.cmake
   configure_shared_library_build_settings()
   configure_boost_build_settings()
