@@ -14,6 +14,7 @@ function(catkin_workspace)
 
   # libraries.cmake
   configure_shared_library_build_settings()
+  configure_boost_build_settings()
 
   em_expand(
     ${catkin_EXTRAS_DIR}/templates/topologically_traverse.py.in
