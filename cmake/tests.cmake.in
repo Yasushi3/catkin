@@ -75,6 +75,9 @@ function(download_test_data _url _filename _md5)
   add_dependencies(tests ${_testname})
 endfunction()
 
+# Make sure libraries.cmake:configure_gtest_build_settings() 
+# has been called from catkin_workspace() so the gtest variables 
+# are initialised.
 function(add_gtest exe)
   # Look for optional TIMEOUT argument, #2645
   parse_arguments(_gtest "TIMEOUT;WORKING_DIRECTORY" "" ${ARGN})
@@ -87,10 +90,6 @@ function(add_gtest exe)
   endif()
 
   # Create the program, with basic + gtest build flags
-  find_package(GTest)
-  if(NOT GTEST_FOUND)
-    message("Warning: GTest not found; C++ tests will fail to build.")
-  endif()
   include_directories(${GTEST_INCLUDE_DIRS})
   add_executable(${exe} EXCLUDE_FROM_ALL ${_gtest_DEFAULT_ARGS})
   target_link_libraries(${exe} ${GTEST_LIBRARIES} ${THREADS_LIBRARY})

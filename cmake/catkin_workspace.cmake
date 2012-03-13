@@ -23,6 +23,7 @@ function(catkin_workspace)
 
   # libraries.cmake
   configure_shared_library_build_settings()
+  configure_gtest_build_settings()
   configure_boost_build_settings()
 
   em_expand(
